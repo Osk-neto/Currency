@@ -49,68 +49,91 @@ var app = {
 };
 
 
-
+//created a function to convert USD to BRL
 function currencyUsdToBrl(){
 
+    //created a variable to be a instance of class XMLHttpRequest
+    
     var http =  new XMLHttpRequest();
-
+    //here is the end point of the API
     const url = 'http://www.apilayer.net/api/live?access_key=0f592d2601bc85f7961ec1a4c10f82c7&format=1';
-
+    //here i prepared to request
     http.open("get",url);
-
+    // send request
     http.send();
-
+    //here i obtain response and make de currency with this data
     http.onreadystatechange = (e) =>{
 
+        //here i get the response in text format
         var response = http.responseText;
-
+        //here i change the formato from text to json
         var responseJSON = JSON.parse(response);
 
+        //print in the console to test if is working
         console.log(responseJSON);
+        // store in a variable the data that i want to make my currency
         var usdBrl = responseJSON.quotes.USDBRL;
 
-        //console.log(usdBrl);
         
+        // get the data from input and change it from string to INT
         var usd = parseInt(document.getElementById('dollar').value);
-
+        // here i make the currency
         var result = usd* usdBrl + " Reais";
 
         
-
+        //print in the console to test if is working
         console.log(result);
+        //print my currency result on the front end
         document.getElementById('resultReal').innerHTML = result;
 
     }
 }
+//created a function to convert BRL to USD
 
 function currencyBrlToUsd(){
 
+     //created a variable to be a instance of class XMLHttpRequest
+
     var http =  new XMLHttpRequest();
+    //here is the end point of the API
 
     const url = 'http://www.apilayer.net/api/live?access_key=0f592d2601bc85f7961ec1a4c10f82c7&format=1';
+    //here i prepared to request
 
     http.open("get",url);
+    // send request
 
     http.send();
+    //here i obtain response and make de currency with this data
 
     http.onreadystatechange = (e) =>{
+        //here i get the response in text format
 
         var response = http.responseText;
+        //here i change the formato from text to json
 
         var responseJSON = JSON.parse(response);
+        //print in the console to test if is working
 
         console.log(responseJSON);
+        // store in a variable the data that i want to make my currency
+
         var usdBrl = responseJSON.quotes.USDBRL;
 
-        //console.log(usdBrl);
         
+        // get the data from input and change it from string to INT
+
         var brl = parseInt(document.getElementById('real').value);
+        // here i make the currency
 
         var result = brl/ usdBrl + " Dollars" ;
 
-        
+        //print in the console to test if is working
+
 
         console.log(result);
+         //print my currency result on the front end
+
         document.getElementById('resultDolar').innerHTML = result;
 
     }
